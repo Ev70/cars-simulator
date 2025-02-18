@@ -25,8 +25,26 @@ public class Vehicle : MonoBehaviour
     [SerializeField] InputActionProperty positiveTrigger;
     [SerializeField] InputActionProperty negativeTrigger;
 
+    [SerializeField] XRSlider transmissionBox;
+
     void Update()
     {
+        if (transmissionBox.value < 0.25f)
+        {
+
+        }
+        else if (transmissionBox.value < 0.5f)
+        {
+
+        }
+        else if (transmissionBox.value < 0.75f)
+        {
+
+        }
+        else
+        {
+
+        }
         float isMotor = 0;
         if (isPlayerInVehicle && positiveTrigger.action.ReadValue<float>() > 0.5f)
         {
