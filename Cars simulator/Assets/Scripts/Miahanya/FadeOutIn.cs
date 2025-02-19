@@ -20,6 +20,11 @@ public class FadeOutIn : MonoBehaviour
     {
         StartCoroutine(FadeCor());
     }
+    private void OnApplicationQuit()
+    {
+        RenderSettings.skybox.SetFloat("_Exposure", 1);
+        DirectLight.intensity = 1;
+    }
     IEnumerator FadeCor()
     {
         float t = (state == fadeState.In) ? 1 : 0;
