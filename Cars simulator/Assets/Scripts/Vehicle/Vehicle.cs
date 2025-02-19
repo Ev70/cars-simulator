@@ -8,6 +8,7 @@ using UnityEngine.XR.Content.Interaction;
 public class Vehicle : MonoBehaviour
 {
     public Transform player;
+    [SerializeField] CharacterController characterController;
     [SerializeField] ContinuousMoveProviderBase continuousMoveProvider;
     float playerSpeed;
     public bool isPlayerInVehicle;
@@ -29,52 +30,82 @@ public class Vehicle : MonoBehaviour
 
     void Update()
     {
-        if (transmissionBox.value < 0.25f)
+        if (isPlayerInVehicle)
         {
-
-        }
-        else if (transmissionBox.value < 0.5f)
-        {
-
-        }
-        else if (transmissionBox.value < 0.75f)
-        {
-
-        }
-        else
-        {
-
-        }
-        float isMotor = 0;
-        if (isPlayerInVehicle && positiveTrigger.action.ReadValue<float>() > 0.5f)
-        {
-            speed += plusAcceleration * Time.deltaTime;
-        }
-        else if (isPlayerInVehicle && negativeTrigger.action.ReadValue<float>() > 0.5f)
-        {
-            speed -= 2 * plusAcceleration * Time.deltaTime;
-        }
-        else
-        {
-            if (speed > 0)
+            if (transmissionBox.value < 0.25f)
             {
-                speed -= minusAcceleration * Time.deltaTime;
-                speed = Mathf.Max(0, speed);
+                foreach (var wheel in wheels)
+                {
+                    wheel.Steer(Mathf.Lerp(-1, 1, steeringWheel.value));
+                    wheel.Accelerate(0);
+                    wheel.SetBreakTorque(breakTorque);
+                    wheel.UpdateWheelPosition();
+                }
+            }
+            else if (transmissionBox.value < 0.5f)
+            {
+                
+                float isNotMotor = 0;
+                if (isPlayerInVehicle && positiveTrigger.action.ReadValue<float>() > 0.5f)
+                {
+                    speed -= plusAcceleration * Time.deltaTime;
+                }
+                else if (isPlayerInVehicle && negativeTrigger.action.ReadValue<float>() > 0.5f)
+                {
+                    speed += plusAcceleration * Time.deltaTime;
+                    isNotMotor = 5;
+                }
+                else
+                {
+                    speed += minusAcceleration * Time.deltaTime;
+                    isNotMotor = 1;
+                }
+                speed = Mathf.Min(0, speed);
+                foreach (var wheel in wheels)
+                {
+                    wheel.Steer(Mathf.Lerp(-1, 1, steeringWheel.value));
+                    wheel.Accelerate(speed);
+                    wheel.SetBreakTorque(breakTorque * isNotMotor);
+                    wheel.UpdateWheelPosition();
+                }
+            }
+            else if (transmissionBox.value < 0.75f)
+            {
+                foreach (var wheel in wheels)
+                {
+                    wheel.Steer(Mathf.Lerp(-1, 1, steeringWheel.value));
+                    wheel.Accelerate(speed);
+                    wheel.UpdateWheelPosition();
+                }
             }
             else
             {
-                speed += minusAcceleration * Time.deltaTime;
-                speed = Mathf.Min(0, speed);
+                float isNotMotor = 0;
+                if (isPlayerInVehicle && positiveTrigger.action.ReadValue<float>() > 0.5f)
+                {
+                    speed += plusAcceleration * Time.deltaTime;
+                }
+                else if (isPlayerInVehicle && negativeTrigger.action.ReadValue<float>() > 0.5f)
+                {
+                    speed -= plusAcceleration * Time.deltaTime;
+                    isNotMotor = 5;
+                }
+                else
+                {
+                    speed -= minusAcceleration * Time.deltaTime;
+                    isNotMotor = 1;
+                }
+                speed = Mathf.Max(0, speed);
+                foreach (var wheel in wheels)
+                {
+                    wheel.Steer(Mathf.Lerp(-1, 1, steeringWheel.value));
+                    wheel.Accelerate(speed);
+                    wheel.SetBreakTorque(breakTorque * isNotMotor);
+                    wheel.UpdateWheelPosition();
+                }
             }
-            isMotor = 1;
         }
-        foreach (var wheel in wheels)
-        {
-            wheel.Steer(Mathf.Lerp(-1, 1, steeringWheel.value));
-            wheel.Accelerate(speed);
-            wheel.SetBreakTorque(breakTorque * isMotor);
-            wheel.UpdateWheelPosition();
-        }
+        
     }
     void Start()
     {
@@ -84,14 +115,18 @@ public class Vehicle : MonoBehaviour
     public void SetPlayer()
     {
         isPlayerInVehicle = true;
+        characterController.enabled = false;
         player.parent = transform;
         player.position = inPoint.position;
         player.rotation = inPoint.rotation;
         continuousMoveProvider.moveSpeed = 0;
     }
+    [ContextMenu("RemovePlayer")]
     public void RemovePlayer()
     {
+        Debug.Log("R");
         isPlayerInVehicle = false;
+        characterController.enabled = true;
         player.parent = null;
         player.position = outPoint.position;
         player.rotation = outPoint.rotation;
