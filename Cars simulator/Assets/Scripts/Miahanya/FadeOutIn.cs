@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.Experimental.VFX;
 using UnityEngine.VFX;
+using Unity.VisualScripting;
 public class FadeOutIn : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,18 +20,19 @@ public class FadeOutIn : MonoBehaviour
     {
         StartCoroutine(FadeCor());
     }
+    private void OnApplicationQuit()
+    {
+        RenderSettings.skybox.SetFloat("_Exposure", 1);
+        DirectLight.intensity = 1;
+    }
     IEnumerator FadeCor()
     {
-        int target;
-        if (state == fadeState.In)
-        {
-            target = 0;
-        }
-        else
-        {
-            target = 1;
-        }
         float t = (state == fadeState.In) ? 1 : 0;
+        if (state == fadeState.Out)
+        {
+            visualEffect.Play();
+            yield return new WaitForSeconds(2f);
+        }
         while (t >= 0 && state == fadeState.In || t <= 1 && state == fadeState.Out)
         {
             Debug.Log(t);
@@ -39,6 +41,10 @@ public class FadeOutIn : MonoBehaviour
             RenderSettings.skybox.SetFloat("_Exposure", t);
             DirectLight.intensity = t;
             yield return new WaitForEndOfFrame();
+        }
+        if (state == fadeState.In)
+        {
+            SceneManager.LoadScene(index);
         }
     }
 }

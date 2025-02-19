@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.34338304, g: 0.47431773, b: 0.8514431, a: 1}
+  m_IndirectSpecularColor: {r: 0.34298924, g: 0.4739364, b: 0.85069245, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorFade: {r: 0, g: 0, b: 0, a: 0}
-  state: 0
+  state: 1
   durationFade: 0.1
   DirectLight: {fileID: 3198942}
   index: 1
@@ -977,7 +977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!2083052967 &8127372279675601980
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335922877522711527}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
