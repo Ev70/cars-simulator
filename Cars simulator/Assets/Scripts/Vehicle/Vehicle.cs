@@ -115,21 +115,23 @@ public class Vehicle : MonoBehaviour
     public void SetPlayer()
     {
         isPlayerInVehicle = true;
-        characterController.enabled = false;
-        player.parent = transform;
+        if (characterController) characterController.enabled = false;
+        
         player.position = inPoint.position;
         player.rotation = inPoint.rotation;
         continuousMoveProvider.moveSpeed = 0;
+        player.parent = transform;
     }
     [ContextMenu("RemovePlayer")]
     public void RemovePlayer()
     {
         Debug.Log("R");
         isPlayerInVehicle = false;
-        characterController.enabled = true;
+        
         player.parent = null;
         player.position = outPoint.position;
         player.rotation = outPoint.rotation;
         continuousMoveProvider.moveSpeed = playerSpeed;
+        if (characterController) characterController.enabled = true;
     }
 }
