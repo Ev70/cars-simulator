@@ -806,6 +806,11 @@ PrefabInstance:
       propertyPath: maxAngle
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1965725941266606827, guid: 86f1080e6c922ee43a22398e5b60b392,
+        type: 3}
+      propertyPath: m_SelectMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2154611971180164487, guid: 86f1080e6c922ee43a22398e5b60b392,
         type: 3}
       propertyPath: m_Constraints
