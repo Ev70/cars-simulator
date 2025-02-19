@@ -12,9 +12,14 @@ public class TrafficLight : MonoBehaviour
     private bool timerStopped;
     [SerializeField] bool carStopped = true;
     public float timeAfterStart;
+    [SerializeField] AudioClip raceMusic;
     IEnumerator StartRace()
     {
-        
+        AudioSource audio = new();
+        audio.transform.SetParent(transform);
+        audio.clip = raceMusic;
+        audio.loop = true;
+        audio.Play();
         foreach(GameObject obj in redLightObjects)
         {
             obj.GetComponent<Renderer>().material.color = Color.red;
