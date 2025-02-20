@@ -125,7 +125,6 @@ public class Vehicle : MonoBehaviour
     [ContextMenu("RemovePlayer")]
     public void RemovePlayer()
     {
-        Debug.Log("R");
         isPlayerInVehicle = false;
         
         player.parent = null;
@@ -133,5 +132,24 @@ public class Vehicle : MonoBehaviour
         player.rotation = outPoint.rotation;
         continuousMoveProvider.moveSpeed = playerSpeed;
         if (characterController) characterController.enabled = true;
+    }
+    public void SetTransmissionBoxKnobPosition()
+    {
+        if (transmissionBox.value < 0.25f)
+        {
+            transmissionBox.value = 0;
+        }
+        else if (transmissionBox.value < 0.5f)
+        {
+            transmissionBox.value = 0.33f;
+        }
+        else if (transmissionBox.value < 0.75f)
+        {
+            transmissionBox.value = 0.66f;
+        }
+        else
+        {
+            transmissionBox.value = 1;
+        }
     }
 }
