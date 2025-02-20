@@ -5,3 +5,7 @@
 Булов Сергей Андреевич, 3D моделлер
 Сисян Нелли Армановна
 Шлем: Pico 4
+
+Ассеты:
+https://free3d.com/ru/3d-model/low-poly-f1-car-105259.html - модель спорткара
+https://free3d.com/ru/3d-model/truck-daf-99043.html - начальная версия грузовика
