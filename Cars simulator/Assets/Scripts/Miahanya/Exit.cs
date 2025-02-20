@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class vuitivokno : MonoBehaviour
 {
-    public void goOut()
+    public void GoOut()
     {
         Application.Quit();
     }

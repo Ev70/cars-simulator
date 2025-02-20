@@ -30,4 +30,8 @@ public class Wheel : MonoBehaviour
     {
         wheelCollider.brakeTorque = breakPower;
     }
+    public float GetMotorTorque()
+    {
+        return wheelCollider.motorTorque;
+    }
 }

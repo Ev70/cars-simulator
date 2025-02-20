@@ -26,8 +26,21 @@ public class Vehicle : MonoBehaviour
     [SerializeField] InputActionProperty positiveTrigger;
     [SerializeField] InputActionProperty negativeTrigger;
 
-    [SerializeField] XRSlider transmissionBox;
+    [SerializeField] Speedometer speedometer;
 
+    [SerializeField] XRSlider transmissionBox;
+    Rigidbody rb;
+
+    [SerializeField] AudioSource transmissionChangeSound;
+    [SerializeField] AudioSource motorSound;
+    [SerializeField] AudioSource backMoving;
+    [SerializeField] AudioSource enviromentSound;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        playerSpeed = continuousMoveProvider.moveSpeed;
+    }
     void Update()
     {
         if (isPlayerInVehicle)
@@ -105,11 +118,7 @@ public class Vehicle : MonoBehaviour
                 }
             }
         }
-        
-    }
-    void Start()
-    {
-        playerSpeed = continuousMoveProvider.moveSpeed;
+        speedometer.speed = Mathf.Abs(rb.velocity.magnitude*3);
     }
 
     public void SetPlayer()
@@ -121,6 +130,9 @@ public class Vehicle : MonoBehaviour
         player.rotation = inPoint.rotation;
         continuousMoveProvider.moveSpeed = 0;
         player.parent = transform;
+        motorSound.Play();
+        enviromentSound.volume = 0.5f;
+
     }
     [ContextMenu("RemovePlayer")]
     public void RemovePlayer()
@@ -132,24 +144,31 @@ public class Vehicle : MonoBehaviour
         player.rotation = outPoint.rotation;
         continuousMoveProvider.moveSpeed = playerSpeed;
         if (characterController) characterController.enabled = true;
+        motorSound.Stop();
+        enviromentSound.volume = 1;
     }
     public void SetTransmissionBoxKnobPosition()
     {
+        transmissionChangeSound.Play();
         if (transmissionBox.value < 0.25f)
         {
             transmissionBox.value = 0;
+            backMoving.Stop();
         }
         else if (transmissionBox.value < 0.5f)
         {
             transmissionBox.value = 0.33f;
+            backMoving.Play();
         }
         else if (transmissionBox.value < 0.75f)
         {
             transmissionBox.value = 0.66f;
+            backMoving.Stop();
         }
         else
         {
             transmissionBox.value = 1;
+            backMoving.Stop();
         }
     }
 }
