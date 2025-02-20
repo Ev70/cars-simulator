@@ -2055,6 +2055,21 @@ PrefabInstance:
       objectReference: {fileID: 1469309116}
     - target: {fileID: 6551058854091296097, guid: 6a87cb34b4a96d140aef5e2900508c05,
         type: 3}
+      propertyPath: colorFade.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551058854091296097, guid: 6a87cb34b4a96d140aef5e2900508c05,
+        type: 3}
+      propertyPath: colorFade.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551058854091296097, guid: 6a87cb34b4a96d140aef5e2900508c05,
+        type: 3}
+      propertyPath: colorFade.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551058854091296097, guid: 6a87cb34b4a96d140aef5e2900508c05,
+        type: 3}
       propertyPath: visualEffect
       value: 
       objectReference: {fileID: 361280747}
