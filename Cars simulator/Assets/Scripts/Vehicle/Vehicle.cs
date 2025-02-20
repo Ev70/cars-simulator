@@ -118,7 +118,7 @@ public class Vehicle : MonoBehaviour
                 }
             }
         }
-        speedometer.speed = Mathf.Abs(rb.velocity.magnitude*3);
+        if (speedometer) speedometer.speed = Mathf.Abs(rb.velocity.magnitude*3);
     }
 
     public void SetPlayer()
