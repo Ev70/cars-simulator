@@ -710,7 +710,12 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  speedometer: {fileID: 0}
   transmissionBox: {fileID: 839224139763753923}
+  transmissionChangeSound: {fileID: 0}
+  motorSound: {fileID: 0}
+  backMoving: {fileID: 0}
+  enviromentSound: {fileID: 0}
 --- !u!114 &5962012494958905146
 MonoBehaviour:
   m_ObjectHideFlags: 0
