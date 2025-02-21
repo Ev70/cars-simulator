@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/mishanya2.unity
     guid: 5e0e7c1264ce9034499e46cc4df60ef5
   - enabled: 1
     path: Assets/Scenes/Location1(DCE).unity
     guid: ec801bbfebd83af43bc2d9e2b3c4966b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Location2(Drift).unity
     guid: 9d5541be8e2037b43995d48f2f7605c1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Location3(Race).unity
     guid: 15feeaa5c32c0294e85dbcf5b88c172f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Location4(ParallelParking).unity
     guid: ad981c4019640ef47b928a663adb05d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/startingscene.unity
     guid: f1c0ac68b602ec847b5f3110653f41f2
   m_configObjects:
