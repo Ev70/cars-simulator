@@ -34,14 +34,14 @@ public class Race : MonoBehaviour
         yellow.color = Color.yellow;
         yield return new WaitWhile(() => carStopped == false);
         yellow.color = Color.gray;
-        for (int i = 1; i <= redLightObjects.Length-2; i++)
+        for (int i = 1; i <= redLightObjects.Length-1; i++)
         {
             redLightObjects[i-1].GetComponent<Renderer>().material.color = Color.gray;
             redLightObjects[i].GetComponent<Renderer>().material.color = Color.red;
             yield return new WaitForSeconds(0.5f);
         }
 
-        //redLightObjects[redLightObjects.Length - 1].GetComponent<Renderer>().material.color = Color.gray;
+        redLightObjects[redLightObjects.Length - 1].GetComponent<Renderer>().material.color = Color.gray;
         yield return new WaitForSeconds(Random.Range(0.5f, 2f));
         green.color = Color.green;
         while (!isFinished)
