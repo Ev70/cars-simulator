@@ -18,14 +18,18 @@ public class FadeOutIn : MonoBehaviour
     [SerializeField] VisualEffect visualEffect;
     public void FadeAndGoToScene()
     {
-        StartCoroutine(FadeCor());
+        StartCoroutine(FadeCor(index));
+    }
+    public void FadeAndGoToScene(int SceneIndex)
+    {
+        StartCoroutine(FadeCor(SceneIndex));
     }
     private void OnApplicationQuit()
     {
         RenderSettings.skybox.SetFloat("_Exposure", 1);
         DirectLight.intensity = 1;
     }
-    IEnumerator FadeCor()
+    IEnumerator FadeCor(int SceneIndex)
     {
         float t = (state == fadeState.In) ? 1 : 0;
         if (state == fadeState.Out && visualEffect != null)
@@ -38,14 +42,16 @@ public class FadeOutIn : MonoBehaviour
             int dir = (state == fadeState.In) ? -1 : 1;
             t += Time.deltaTime / dir * durationFade;
             RenderSettings.skybox.SetFloat("_Exposure", t);
+            RenderSettings.sun.intensity = t;
             DirectLight.intensity = t;
             yield return new WaitForEndOfFrame();
         }
         if (state == fadeState.In)
         {
-            SceneManager.LoadScene(index);
+            SceneManager.LoadScene(SceneIndex);
         }
     }
+
 }
 public enum fadeState {
     Out, In // Out из темноты в свет / In из света в темноту
