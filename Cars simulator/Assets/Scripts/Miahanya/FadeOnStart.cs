@@ -7,7 +7,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class FadeOnStart : MonoBehaviour
 {
     [SerializeField] FadeOutIn fade;
-    private void Start()
+    private void Awake()
     {
         fade.FadeAndGoToScene();
     }

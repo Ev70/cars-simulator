@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnPointService : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameObject[] spawnPoints;
+    [SerializeField] GameObject[] spawnPoints;
     public int savedPoint;
     private void Start()
     {
@@ -15,5 +15,18 @@ public class SpawnPointService : MonoBehaviour
 
             spawnPoints[i].GetComponent<SpawnPoint>().SetValues(i);
         }
+    }
+    private bool CheckPoint(int Current)
+    {
+        if (Current-savedPoint == 1)
+        {
+            savedPoint = Current;
+            return true;
+        }
+        return false;
+    }
+    public int getLenght()
+    {
+        return spawnPoints.Length;
     }
 }

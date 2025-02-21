@@ -28,14 +28,13 @@ public class FadeOutIn : MonoBehaviour
     IEnumerator FadeCor()
     {
         float t = (state == fadeState.In) ? 1 : 0;
-        if (state == fadeState.Out)
+        if (state == fadeState.Out && visualEffect != null)
         {
-            visualEffect.Play();
             yield return new WaitForSeconds(2f);
+            visualEffect.Play();
         }
         while (t >= 0 && state == fadeState.In || t <= 1 && state == fadeState.Out)
         {
-            Debug.Log(t);
             int dir = (state == fadeState.In) ? -1 : 1;
             t += Time.deltaTime / dir * durationFade;
             RenderSettings.skybox.SetFloat("_Exposure", t);
