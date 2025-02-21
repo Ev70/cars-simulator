@@ -50,6 +50,7 @@ public class FadeOutIn : MonoBehaviour
         {
             SceneManager.LoadScene(SceneIndex);
         }
+        
     }
 
 }
